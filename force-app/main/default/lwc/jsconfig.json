@@ -1,0 +1,47 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "baseUrl": ".",
+        "paths": {
+            "c/modal": [
+                "modal/modal.js"
+            ],
+            "c/pubsub": [
+                "pubsub/pubsub.js"
+            ],
+            "c/subtodoCreate": [
+                "subtodoCreate/subtodoCreate.js"
+            ],
+            "c/subtodoItem": [
+                "subtodoItem/subtodoItem.js"
+            ],
+            "c/todoContainer": [
+                "todoContainer/todoContainer.js"
+            ],
+            "c/todoCreate": [
+                "todoCreate/todoCreate.js"
+            ],
+            "c/todoEdit": [
+                "todoEdit/todoEdit.js"
+            ],
+            "c/todoItem": [
+                "todoItem/todoItem.js"
+            ],
+            "c/todoList": [
+                "todoList/todoList.js"
+            ],
+            "c/todoSearch": [
+                "todoSearch/todoSearch.js"
+            ]
+        }
+    },
+    "include": [
+        "**/*",
+        "../../../../.sfdx/typings/lwc/**/*.d.ts"
+    ],
+    "typeAcquisition": {
+        "include": [
+            "jest"
+        ]
+    }
+}

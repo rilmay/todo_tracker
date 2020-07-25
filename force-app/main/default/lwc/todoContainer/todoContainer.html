@@ -1,0 +1,29 @@
+<template>
+    <lightning-card
+            title="Todo list"
+            icon-name="custom:custom3">
+        <div class="slds-m-around--x-large">
+            <lightning-layout>
+                <lightning-layout-item >
+                    <c-todo-search></c-todo-search>
+                </lightning-layout-item>
+                <lightning-button class=slds-m-around--large
+                                  label="Create"
+                                  onclick={createTodo}
+                ></lightning-button>
+                <c-modal header={modalHeader}>
+                        <c-todo-create onsuccess={handleCloseModal}></c-todo-create>
+                        <div slot="footer">
+                            <lightning-button
+                                    class="slds-float_right"
+                                    label="Close"
+                                    variant="brand"
+                                    onclick={handleCloseModal}
+                            ></lightning-button>
+                        </div>
+                </c-modal>
+            </lightning-layout>
+            <c-todo-list></c-todo-list>
+        </div>
+    </lightning-card>
+</template>

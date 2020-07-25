@@ -1,0 +1,25 @@
+<template>
+        <p if:false={disabledcheck}>
+                <lightning-input type="checkbox" data-field='isdone' label={subtodo.Name} checked='{subtodo.Is_done__c}' onchange={handleedit}>
+                </lightning-input>
+        </p>
+        <p if:true={disabledcheck}>
+                <lightning-input type="checkbox" disabled="" data-field='isdone' label={subtodo.Name} checked='{subtodo.Is_done__c}'>
+                </lightning-input>
+        </p>
+        <p>{subtodo.Description__c} 
+                        <lightning-button-icon if:true={disabledcheck}
+                        size="x-small"
+                        disabled=""
+                        icon-name="utility:delete"
+                        variant="border-filled"
+                        onclick={deleteTodo}
+                        data-recordid={subtodo.Id}></lightning-button-icon>
+                        <lightning-button-icon if:false={disabledcheck}
+                        size="x-small"
+                        icon-name="utility:delete"
+                        variant="border-filled"
+                        onclick={deleteTodo}
+                        data-recordid={subtodo.Id}></lightning-button-icon>
+                         </p>
+</template>

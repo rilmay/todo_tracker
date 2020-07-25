@@ -1,0 +1,65 @@
+<template>
+    <template if:true={todo}>
+        <lightning-layout vertical-align="center">
+            <lightning-layout-item class="slds-size_4-of-12">
+                <template if:true={todo.Image__c}>
+                    <img alt="Todo photo" class={todo.Category__c}
+                         src={todo.Image__c}/>
+                </template>
+                <template if:false={todo.Image__c}>
+                    <img alt="Todo photo" class={todo.Category__c}
+                         src='https://cdn4.iconfinder.com/data/icons/clipboards/32/file-document-clipboard-list-512.png'/>
+                </template>
+            </lightning-layout-item>
+            <lightning-layout-item padding="around-small" class={styling}>
+                <div class="slds-text-heading_medium"><b>{todo.Name}</b></div>
+                <br>
+                <p><b>Category: </b>{todo.Category__c}</p>
+                <p><b>Creation date: </b>{date}</p>
+                <p><b>Description: </b>{todo.Description__c}</p>
+                <p><b>Checklist:</b></p>
+                <template if:true={todo.Subtodos__r}>
+                    <template for:each={todo.Subtodos__r} for:item="subtodo">
+                        <lightning-layout-item key={subtodo.Id}>
+                            <c-subtodo-item subtodo={subtodo} disabledcheck={todo.Is_done__c}></c-subtodo-item>
+                        </lightning-layout-item>    
+                    </template>
+                </template>
+                <template if:false={todo.Subtodos__r}><div class="slds-text-body_small">Nothing yet... <a onclick={createSubtodo}>Add item</a></div></template>
+                <p>
+                    <br>
+                    <lightning-button if:true={todo.Subtodos__r} class="slds-size_small"
+                                  label="Add"
+                                  onclick={createSubtodo}></lightning-button>
+                    <template if:true={todo.Is_done__c}>
+                                <div class="slds-float_right">
+                                        <lightning-button class="slds-size_small"
+                                                          label="Done"
+                                                          disabled=""></lightning-button></div>
+                    </template>
+                    <template if:false={todo.Is_done__c}>
+                                <div class="slds-float_right">
+                                            <lightning-button-icon
+                                            variant="border-filled"
+                                            icon-name="action:approval"
+                                            onclick={changeStatus}>
+                                            </lightning-button-icon>
+                                </div>
+                    </template>
+                </p>
+                <c-modal header={modalHeader} class="slds-theme_default">
+                    <c-subtodo-create onsuccess={handleCloseModal} todoid={todo.Id}></c-subtodo-create>
+                        <div slot="footer">
+                            <lightning-button
+                                class="slds-float_right"
+                                label="Close"
+                                variant="brand"
+                                onclick={handleCloseModal}>
+                            </lightning-button>
+                        </div>
+                </c-modal>
+
+            </lightning-layout-item>
+        </lightning-layout>
+    </template>
+</template>

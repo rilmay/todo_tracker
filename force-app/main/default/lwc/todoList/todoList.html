@@ -1,0 +1,36 @@
+<template>
+    <template if:true={todos.data}>
+        <lightning-layout multiple-rows='true' vertical-align='center' horizontal-align='space'>
+        <template for:each={todos.data} for:item="todo">
+            <lightning-layout-item key={todo.Id} flexibility='auto' size='4'>
+                <c-todo-item key={todo.Id} todo={todo}></c-todo-item>
+                <div class="slds-align_absolute-center">
+                    <lightning-button-icon
+                            icon-name="utility:delete"
+                            onclick={deleteTodo}
+                            data-recordid={todo.Id}
+                    ></lightning-button-icon>
+                    <lightning-button-icon
+                            icon-name="utility:settings"
+                            onclick={editTodo}
+                            data-recordid={todo.Id}
+                    ></lightning-button-icon>
+                </div>
+            </lightning-layout-item>
+        </template>
+        </lightning-layout>
+        <c-modal header={modalHeader}>
+            <c-todo-edit onrefresh={handleRefresh} edit-id={editId}></c-todo-edit>
+            <div slot="footer">
+                <lightning-button
+                        label="Close"
+                        variant="brand"
+                        onclick={handleCloseModal}
+                ></lightning-button>
+            </div>
+        </c-modal>
+    </template>
+    <template if:false={todos.data}>
+        <div>No Todos Yet</div>
+    </template>
+</template>
